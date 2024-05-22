@@ -6,33 +6,45 @@
 
 <ion-content [fullscreen]="true" style="text-align: center">
   <div id="container" *ngIf="currentWeather && currentWeather.weather">
-    <h1 class="ion-60p">{{ temp }} °C</h1>
-    <div *ngFor="let w of currentWeather.weather">
-      <img
-        src="http://openweathermap.org/img/wn/{{ w.icon }}@2x.png"
-        height="180"
-        alt="{{ w.description }}"
-      />
-      <h1 class="ion-30p">
-        {{ city }} <br />
-        {{ w.main }} (<small>{{ w.description }}</small>)
-      </h1>
-    </div>
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>
+          <h1 class="ion-60p">{{ temp }} °C</h1>
+        </ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <div *ngFor="let w of currentWeather.weather">
+          <img
+            src="http://openweathermap.org/img/wn/{{ w.icon }}@2x.png"
+            height="180"
+            alt="{{ w.description }}"
+          />
+          <h1 class="ion-30p">
+            {{ city }} <br />
+            {{ w.main }} (<small>{{ w.description }}</small>)
+          </h1>
+        </div>
+      </ion-card-content>
+    </ion-card>
   </div>
 
   <div id="forecast-container" *ngIf="forecast.length">
     <h2>Forecast</h2>
-    <div *ngFor="let item of forecast">
-      <p>{{ item.dt_txt }}</p>
-      <p>{{ item.main.temp }} °C</p>
-      <div *ngFor="let w of item.weather">
-        <img
-          src="http://openweathermap.org/img/wn/{{ w.icon }}@2x.png"
-          height="100"
-          alt="{{ w.description }}"
-        />
-        <p>{{ w.main }} (<small>{{ w.description }}</small>)</p>
-      </div>
-    </div>
+    <ion-card *ngFor="let item of forecast">
+      <ion-card-header>
+        <ion-card-title>{{ item.dt_txt }}</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <p>{{ item.main.temp }} °C</p>
+        <div *ngFor="let w of item.weather">
+          <img
+            src="http://openweathermap.org/img/wn/{{ w.icon }}@2x.png"
+            height="100"
+            alt="{{ w.description }}"
+          />
+          <p>{{ w.main }} (<small>{{ w.description }}</small>)</p>
+        </div>
+      </ion-card-content>
+    </ion-card>
   </div>
 </ion-content>
