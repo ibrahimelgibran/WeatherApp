@@ -5,37 +5,24 @@
 </ion-header>
 
 <ion-content>
-  <ion-card>
-    <img alt="IBRAHIM EL GIBRAN" src="assets/meprofil.jpg" />
-    <ion-card-header>
-      <ion-card-title>Ibrahim El Gibran</ion-card-title>
-      <ion-card-subtitle>founder iegcode</ion-card-subtitle>
-    </ion-card-header>
-
-    <ion-card-content>
-      This is IEGCODE? a platform e-commerce personal who provides services your
-      need. there are some type very product pada e-commerce
-      <a href="https://iegcode.my.id" style="text-decoration: none">IEGCODE.</a>
-    </ion-card-content>
-  </ion-card>
   <ion-list>
-    <ion-item *ngFor="let fav of favorites">
+    <ion-item *ngFor="let f of fav">
       <ion-grid>
         <ion-row>
           <ion-col size="4">
             <ion-icon name="calendar-outline"></ion-icon>
-            {{ fav.date | date:'dd MMM yyyy' }}
+            {{f.date | date:'dd MMM yyyy'}}
             <ion-icon name="time-outline"></ion-icon>
-            {{ fav.date | date:'HH:mm' }}
+            {{f.date | date:'HH:mm '}}
           </ion-col>
           <ion-col size="6">
             <ion-label>
-              {{ fav.main }} <br />
-              {{ fav.desc }}
+              {{f.main}} <br />
+              {{f.desc}}
             </ion-label>
           </ion-col>
           <ion-col size="2">
-            <img src="http://openweathermap.org/img/wn/{{fav.icon}}@2x.png" />
+            <img src="http://openweathermap.org/img/wn/{{f.icon}}@2x.png" />
           </ion-col>
         </ion-row>
       </ion-grid>

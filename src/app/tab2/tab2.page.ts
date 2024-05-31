@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { WeatherService } from '../services/weather.service';
 import { Router, NavigationExtras } from '@angular/router';
 
 @Component({
@@ -6,9 +7,17 @@ import { Router, NavigationExtras } from '@angular/router';
   templateUrl: 'tab2.page.html',
   styleUrls: ['tab2.page.scss'],
 })
-export class Tab2Page {
-  whList: any[] = [];
-  constructor(private router: Router) {}
+export class Tab2Page implements OnInit {
+  public forecast: any[] = [];
+
+  constructor(private weatherService: WeatherService, private route: Router) {}
+
+  ngOnInit(): void {
+    this.weatherService.getForecast().subscribe((result) => {
+      this.forecast = result.list;
+      console.log(this.forecast);
+    });
+  }
 
   detailpage(w: any): void {
     let weather = {
@@ -18,13 +27,11 @@ export class Tab2Page {
       desc: w.weather[0].description,
       icon: w.weather[0].icon,
     };
-
     let extras: NavigationExtras = {
       queryParams: {
         special: JSON.stringify(weather),
       },
     };
-
-    this.router.navigate(['/detail'], extras);
+    this.route.navigate(['/detail'], extras);
   }
 }

@@ -6,10 +6,16 @@ import { Component } from '@angular/core';
   styleUrls: ['tab3.page.scss'],
 })
 export class Tab3Page {
-  public favorites;
+  public fav: any[];
 
   constructor() {
-    const favString = localStorage.getItem('fav');
-    this.favorites = favString ? JSON.parse(favString) : null;
+    try {
+      const favData = localStorage.getItem('fav');
+      this.fav = favData ? JSON.parse(favData) : [];
+    } catch (e) {
+      console.error('Error parsing local storage data', e);
+      this.fav = [];
+    }
+    console.log(this.fav);
   }
 }
